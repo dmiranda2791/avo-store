@@ -4,6 +4,10 @@ import { AppProps } from "next/app";
 
 import "semantic-ui-css/semantic.min.css";
 
+export function reportWebVitals(metric) {
+  console.log(metric);
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   // Providers - Context/Providers, Theme, data
   // Layout
