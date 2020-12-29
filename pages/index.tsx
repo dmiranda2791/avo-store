@@ -1,16 +1,25 @@
+import React from "react";
+import fetch from "isomorphic-unfetch";
 import Layout from "@components/Layout";
 import ProductList from "@components/ProductList";
-import React, { useEffect, useState } from "react";
 
-const Home = () => {
-  const [productList, setProductList] = useState<TProduct[]>([]);
+export const getStaticProps = async () => {
+  const response = await fetch("https://avo-store-one.vercel.app/api/avo");
+  const { data } = await response.json();
 
-  useEffect(() => {
-    window
-      .fetch("/api/avo")
-      .then((response) => response.json())
-      .then(({ data }) => setProductList(data));
-  }, []);
+  return {
+    props: {
+      productList: data,
+    },
+  };
+};
+
+interface Props {
+  productList: TProduct[];
+}
+
+const Home = (props: Props) => {
+  const { productList } = props;
 
   return (
     <Layout>
